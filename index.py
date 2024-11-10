@@ -1,17 +1,19 @@
 # TODO: Import the necessary modules
 # Define strategic prompts such as system instructions, few shot examples, and topic keywords
 # Define functions to declare any plant assistant functions
-
-
-
-
-
-
+from gemini.gemini import get_completion
 
 def main():
-    # TODO Add terminal input prompts for user
-    # TODO: Invoke the functions declared above for the plant assistant
-    pass #remember to remove this pass statement
+    while True:
+        # TODO Add terminal input prompts for user
+        print("Welcome to gemini-> Cooking Companion")
+        u_input = input()
+        try:
+            response = get_completion(u_input, temperature=0.9, max_output_tokens=1000)
+            print(response)
+        except:
+            print("api error")
+        # TODO: Invoke the functions declared above for the plant assistant
 
 if __name__ == "__main__":
     main()

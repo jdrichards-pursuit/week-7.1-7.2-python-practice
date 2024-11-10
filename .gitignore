@@ -6,7 +6,8 @@ less-hand-holdy-revised-ai-assistant-instructions.txt
 outline.md
 learnation-work-order.md
 plant-assistant.py
-.env
+*.env
 venv/
-.DS_Store
+*.DS_Store
 notes.md
+*__pycache__
