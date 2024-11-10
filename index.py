@@ -5,7 +5,6 @@ from gemini.gemini import get_completion
 
 def main():
     while True:
-        # TODO Add terminal input prompts for user
         print("Welcome to gemini-> Cooking Companion")
         u_input = input()
         try:
@@ -13,7 +12,6 @@ def main():
             print(response)
         except:
             print("api error")
-        # TODO: Invoke the functions declared above for the plant assistant
 
 if __name__ == "__main__":
     main()

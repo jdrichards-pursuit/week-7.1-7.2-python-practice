@@ -1,6 +1,5 @@
 import google.generativeai as genai
 from dotenv import load_dotenv
-import pandas as pd
 import os
 
 load_dotenv()
@@ -11,9 +10,12 @@ conversation_history = []
 
 def get_completion(prompt, model="gemini-1.5-flash", **kwargs):
     model = genai.GenerativeModel(model)
-    
     # Append the prompt to the conversation history
     conversation_history.append(prompt)
+    #Code to store conversation history, but not too much history, to prevent
+    #a prompt that is too long
+    while sum(len(token) for token in conversation_history) > 4000:
+        conversation_history.pop(0)  # Remove content from the back of the array
     
     # Create a generation_config dictionary with default values
     generation_config = {
