@@ -8,8 +8,7 @@ def main():
         print("Welcome to gemini-> Cooking Companion")
         u_input = input()
         try:
-            response = get_completion(u_input, temperature=0.9, max_output_tokens=1000)
-            print(response)
+            get_completion(u_input.strip(), temperature=0.9, max_output_tokens=1000)
         except:
             print("api error")
 

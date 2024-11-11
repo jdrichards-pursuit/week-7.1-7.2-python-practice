@@ -6,29 +6,15 @@ load_dotenv()
 api_key=os.environ['API_KEY']
 genai.configure(api_key=api_key)
 # Initialize an array to store prompts and responses
-conversation_history = []
+history = []
 
 def get_completion(prompt, model="gemini-1.5-flash", **kwargs):
     model = genai.GenerativeModel(model)
-    # Append the prompt to the conversation history
-    conversation_history.append(prompt)
-    #Code to store conversation history, but not too much history, to prevent
-    #a prompt that is too long
-    while sum(len(token) for token in conversation_history) > 4000:
-        conversation_history.pop(0)  # Remove content from the back of the array
-    
-    # Create a generation_config dictionary with default values
-    generation_config = {
-        "temperature": 0.8,
-        "max_output_tokens": 200
-    }
-    
-    # Update generation_config with any provided kwargs
-    generation_config.update(kwargs)
-    
-    response = model.generate_content(" ".join(conversation_history), generation_config=generation_config)
-    
-    # Append the response to the conversation history
-    conversation_history.append(response.text)
-    
-    return response.text
+    chat = model.start_chat(
+        history=history
+    )
+    response = chat.send_message(prompt, stream=True)
+    for chunk in response:
+        print(chunk.text)
+    for a, b in enumerate(chat.history[-2:]):
+        history.append(b)
