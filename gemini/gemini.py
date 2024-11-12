@@ -1,20 +1,24 @@
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+from Instance.instance import InstanceInfo
+from datetime import datetime
 
 load_dotenv()
 api_key=os.environ['API_KEY']
 genai.configure(api_key=api_key)
 # Initialize an array to store prompts and responses
-history = []
+curr_key = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+instance_info = InstanceInfo()
+instance_info.set_info(curr_key, [])
 
 def get_completion(prompt, model="gemini-1.5-flash", **kwargs):
     model = genai.GenerativeModel(model)
     chat = model.start_chat(
-        history=history
+        history=instance_info.get_info(curr_key)
     )
     response = chat.send_message(prompt, stream=True)
     for chunk in response:
         print(chunk.text)
     for a, b in enumerate(chat.history[-2:]):
-        history.append(b)
+        instance_info.get_info(curr_key).append(b)

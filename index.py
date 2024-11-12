@@ -2,6 +2,11 @@
 # Define strategic prompts such as system instructions, few shot examples, and topic keywords
 # Define functions to declare any plant assistant functions
 from gemini.gemini import get_completion
+import atexit
+from gemini.db_connection import conn, cursor
+from Instance.instance import InstanceInfo
+
+instance_info = InstanceInfo()
 
 def main():
     while True:
