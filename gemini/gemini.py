@@ -18,9 +18,11 @@ def get_completion(prompt, model="gemini-1.5-flash", **kwargs):
     chat = model.start_chat(
         history=instance_info.get_info(curr_key)
     )
+    if not instance_info.get_info(curr_key):
+        prompt += " This chat must be an effective cooking companion."
     response = chat.send_message(prompt, stream=True)
     for chunk in response:
         print(chunk.text)
     for a, b in enumerate(chat.history[-2:]):
         instance_info.get_info(curr_key).append(b)
-        print(f"test printing chat: {b}")
+        

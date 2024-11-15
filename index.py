@@ -1,11 +1,11 @@
-# TODO: Import the necessary modules
-# Define strategic prompts such as system instructions, few shot examples, and topic keywords
-# Define functions to declare any plant assistant functions
 from gemini.gemini import get_completion
 import atexit
 from gemini.db_connection import DatabaseConnection
 from Instance.instance import InstanceInfo
 from gpt2 import summarize_text
+# TODO: Import the necessary modules
+# Define strategic prompts such as system instructions, few shot examples, and topic keywords
+# Define functions to declare any plant assistant functions
 
 instance_info = InstanceInfo()
 db_instance = DatabaseConnection()
