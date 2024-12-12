@@ -25,4 +25,5 @@ def get_completion(prompt, model="gemini-1.5-flash", **kwargs):
         print(chunk.text)
     for a, b in enumerate(chat.history[-2:]):
         instance_info.get_info(curr_key).append(b)
+#code by david paquete
         
